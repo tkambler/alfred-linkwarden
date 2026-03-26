@@ -1,4 +1,19 @@
 {
   "name": "alfred-linkwarden",
-  "packageManager": "yarn@4.12.0"
+  "version": "1.0.0",
+  "description": "Alfred workflow for searching Linkwarden bookmarks",
+  "type": "module",
+  "packageManager": "yarn@4.12.0",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "dependencies": {
+    "alfy": "^3.1.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  },
+  "alfred": {
+    "category": "Productivity"
+  }
 }

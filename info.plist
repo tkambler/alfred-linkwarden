@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>io.snapcrunch.alfred-linkwarden</string>
+	<key>category</key>
+	<string>Productivity</string>
+	<key>connections</key>
+	<dict>
+		<key>76707759-BEFD-47C9-AE1B-9C0C1FB37454</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>F7AFABD7-BEA8-48CF-AAD5-8813CAC9ED98</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+	</dict>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Linkwarden Search</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>browser</key>
+				<string></string>
+				<key>spaces</key>
+				<string></string>
+				<key>url</key>
+				<string>{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>F7AFABD7-BEA8-48CF-AAD5-8813CAC9ED98</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>ln</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string>Searching Linkwarden...</string>
+				<key>script</key>
+				<string>./run-node index.js "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string>index.js</string>
+				<key>subtext</key>
+				<string>Search Linkwarden bookmarks by name or tag</string>
+				<key>title</key>
+				<string>Search Linkwarden</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>76707759-BEFD-47C9-AE1B-9C0C1FB37454</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string>Search Linkwarden bookmarks by name or tag.
+
+## Setup
+1. Run `yarn install` in the workflow directory.
+2. Set LINKWARDEN_URL and LINKWARDEN_API_KEY in workflow variables.
+
+## Usage
+Type `ln &lt;query&gt;` to search. Press Enter to open the link in your browser.</string>
+	<key>uidata</key>
+	<dict>
+		<key>76707759-BEFD-47C9-AE1B-9C0C1FB37454</key>
+		<dict>
+			<key>xpos</key>
+			<integer>10</integer>
+			<key>ypos</key>
+			<integer>10</integer>
+		</dict>
+		<key>F7AFABD7-BEA8-48CF-AAD5-8813CAC9ED98</key>
+		<dict>
+			<key>xpos</key>
+			<integer>250</integer>
+			<key>ypos</key>
+			<integer>10</integer>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<dict>
+		<key>LINKWARDEN_API_KEY</key>
+		<string></string>
+		<key>LINKWARDEN_URL</key>
+		<string></string>
+	</dict>
+	<key>version</key>
+	<string>1.0.0</string>
+	<key>webaddress</key>
+	<string></string>
+</dict>
+</plist>

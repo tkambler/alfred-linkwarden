@@ -15,3 +15,7 @@ node_modules
 
 #!.yarn/cache
 .pnp.*
+
+# Build artifacts
+dist/
+alfred-linkwarden.alfredworkflow
