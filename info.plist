@@ -24,8 +24,13 @@
 	</dict>
 	<key>disabled</key>
 	<false/>
+	<key>icon</key>
+	<dict>
+		<key>path</key>
+		<string>icon.png</string>
+	</dict>
 	<key>name</key>
-	<string>Linkwarden Search</string>
+	<string>Linkwarden</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -63,11 +68,11 @@
 				<key>keyword</key>
 				<string>ln</string>
 				<key>queuedelaycustom</key>
-				<integer>1</integer>
+				<real>0.3</real>
 				<key>queuedelayimmediatelyinitially</key>
 				<true/>
 				<key>queuedelaymode</key>
-				<integer>0</integer>
+				<integer>1</integer>
 				<key>queuemode</key>
 				<integer>2</integer>
 				<key>runningsubtext</key>
@@ -99,11 +104,76 @@
 	<string>Search Linkwarden bookmarks by name or tag.
 
 ## Setup
-1. Run `yarn install` in the workflow directory.
-2. Set LINKWARDEN_URL and LINKWARDEN_API_KEY in workflow variables.
+Set `LINKWARDEN_URL` and `LINKWARDEN_API_KEY` in the workflow variables.
 
 ## Usage
 Type `ln &lt;query&gt;` to search. Press Enter to open the link in your browser.</string>
+	<key>userconfigurationconfig</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>https://linkwarden.example.com</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>The URL of your Linkwarden server</string>
+			<key>label</key>
+			<string>Server URL</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>LINKWARDEN_URL</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string></string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Your Linkwarden API key</string>
+			<key>label</key>
+			<string>API Key</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>LINKWARDEN_API_KEY</string>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>default</key>
+				<string></string>
+				<key>placeholder</key>
+				<string>/path/to/corporate-ca.pem</string>
+				<key>required</key>
+				<false/>
+				<key>trim</key>
+				<true/>
+			</dict>
+			<key>description</key>
+			<string>Path to a CA certificate file (e.g. for corporate VPNs that perform SSL inspection)</string>
+			<key>label</key>
+			<string>CA Certificate Path</string>
+			<key>type</key>
+			<string>textfield</string>
+			<key>variable</key>
+			<string>NODE_EXTRA_CA_CERTS</string>
+		</dict>
+	</array>
 	<key>uidata</key>
 	<dict>
 		<key>76707759-BEFD-47C9-AE1B-9C0C1FB37454</key>
@@ -126,6 +196,8 @@ Type `ln &lt;query&gt;` to search. Press Enter to open the link in your browser.
 		<key>LINKWARDEN_API_KEY</key>
 		<string></string>
 		<key>LINKWARDEN_URL</key>
+		<string></string>
+		<key>NODE_EXTRA_CA_CERTS</key>
 		<string></string>
 	</dict>
 	<key>version</key>
