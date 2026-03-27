@@ -10,16 +10,16 @@ rmSync(OUT, { force: true });
 mkdirSync(DIST);
 
 await build({
-  entryPoints: ['src/index.ts'],
+  entryPoints: ['src/index.ts', 'src/save.ts'],
   bundle: true,
   platform: 'node',
   format: 'esm',
-  outfile: `${DIST}/index.js`,
+  outdir: DIST,
 });
 
 cpSync('info.plist', `${DIST}/info.plist`);
 cpSync('icon.png', `${DIST}/icon.png`);
-cpSync('node_modules/.bin/run-node', `${DIST}/run-node`);
+cpSync('node_modules/run-node/run-node', `${DIST}/run-node`);
 
 execSync(`cd ${DIST} && zip -r ../${OUT} .`, { stdio: 'inherit' });
 
