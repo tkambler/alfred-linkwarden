@@ -12,19 +12,6 @@
 		<array>
 			<dict>
 				<key>destinationuid</key>
-				<string>COND-ACTION-0001</string>
-				<key>modifiers</key>
-				<integer>0</integer>
-				<key>modifiersubtext</key>
-				<string></string>
-				<key>vitoclose</key>
-				<false/>
-			</dict>
-		</array>
-		<key>COND-ACTION-0001</key>
-		<array>
-			<dict>
-				<key>destinationuid</key>
 				<string>F7AFABD7-BEA8-48CF-AAD5-8813CAC9ED98</string>
 				<key>modifiers</key>
 				<integer>0</integer>
@@ -33,6 +20,19 @@
 				<key>vitoclose</key>
 				<false/>
 			</dict>
+			<dict>
+				<key>destinationuid</key>
+				<string>F7AFABD7-BEA8-48CF-AAD5-8813CAC9ED98</string>
+				<key>modifiers</key>
+				<integer>262144</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+				<key>vitoclose</key>
+				<false/>
+			</dict>
+		</array>
+		<key>LNA-FILTER-0001</key>
+		<array>
 			<dict>
 				<key>destinationuid</key>
 				<string>SAVE-SCRIPT-0001</string>
@@ -91,52 +91,12 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>conditions</key>
-				<array>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>open</string>
-						<key>outputlabel</key>
-						<string>Open URL</string>
-					</dict>
-					<dict>
-						<key>inputstring</key>
-						<string>{var:action}</string>
-						<key>matchcasesensitive</key>
-						<false/>
-						<key>matchmode</key>
-						<integer>0</integer>
-						<key>matchstring</key>
-						<string>save</string>
-						<key>outputlabel</key>
-						<string>Save URL</string>
-					</dict>
-				</array>
-				<key>elselabel</key>
-				<string></string>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.utility.conditional</string>
-			<key>uid</key>
-			<string>COND-ACTION-0001</string>
-			<key>version</key>
-			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>concurrently</key>
 				<false/>
 				<key>escaping</key>
 				<integer>102</integer>
 				<key>script</key>
-				<string>./run-node save.js "$1"</string>
+				<string>./run-node do-save.js "$1"</string>
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
@@ -202,7 +162,7 @@
 				<key>scriptargtype</key>
 				<integer>1</integer>
 				<key>scriptfile</key>
-				<string>index.js</string>
+				<string></string>
 				<key>subtext</key>
 				<string>Search Linkwarden bookmarks by name or tag</string>
 				<key>title</key>
@@ -219,15 +179,63 @@
 			<key>version</key>
 			<integer>2</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>alfredfiltersresults</key>
+				<false/>
+				<key>alfredfiltersresultsmatchmode</key>
+				<integer>0</integer>
+				<key>argumenttrimmode</key>
+				<integer>0</integer>
+				<key>argumenttype</key>
+				<integer>0</integer>
+				<key>escaping</key>
+				<integer>102</integer>
+				<key>keyword</key>
+				<string>lna</string>
+				<key>queuedelaycustom</key>
+				<real>0.3</real>
+				<key>queuedelayimmediatelyinitially</key>
+				<true/>
+				<key>queuedelaymode</key>
+				<integer>1</integer>
+				<key>queuemode</key>
+				<integer>2</integer>
+				<key>runningsubtext</key>
+				<string></string>
+				<key>script</key>
+				<string>./run-node save.js "$1"</string>
+				<key>scriptargtype</key>
+				<integer>1</integer>
+				<key>scriptfile</key>
+				<string></string>
+				<key>subtext</key>
+				<string>Save a URL to Linkwarden</string>
+				<key>title</key>
+				<string>Save to Linkwarden</string>
+				<key>type</key>
+				<integer>0</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>LNA-FILTER-0001</string>
+			<key>version</key>
+			<integer>2</integer>
+		</dict>
 	</array>
 	<key>readme</key>
-	<string>Search Linkwarden bookmarks by name or tag.
+	<string>Search and save Linkwarden bookmarks.
 
 ## Setup
 Set `LINKWARDEN_URL` and `LINKWARDEN_API_KEY` in the workflow variables.
 
 ## Usage
-Type `ln &lt;query&gt;` to search. Press Enter to open the link in your browser.</string>
+- `ln &lt;query&gt;` — Search bookmarks by name or tag. Press Enter to open, Ctrl+Enter for preserved version.
+- `lna &lt;url&gt;` — Save a URL to Linkwarden.</string>
 	<key>userconfigurationconfig</key>
 	<array>
 		<dict>
@@ -303,33 +311,33 @@ Type `ln &lt;query&gt;` to search. Press Enter to open the link in your browser.
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
-		<key>COND-ACTION-0001</key>
+		<key>F7AFABD7-BEA8-48CF-AAD5-8813CAC9ED98</key>
 		<dict>
 			<key>xpos</key>
 			<integer>250</integer>
 			<key>ypos</key>
 			<integer>10</integer>
 		</dict>
-		<key>F7AFABD7-BEA8-48CF-AAD5-8813CAC9ED98</key>
+		<key>LNA-FILTER-0001</key>
 		<dict>
 			<key>xpos</key>
-			<integer>490</integer>
-			<key>ypos</key>
 			<integer>10</integer>
+			<key>ypos</key>
+			<integer>190</integer>
 		</dict>
 		<key>SAVE-SCRIPT-0001</key>
 		<dict>
 			<key>xpos</key>
-			<integer>490</integer>
+			<integer>250</integer>
 			<key>ypos</key>
-			<integer>130</integer>
+			<integer>190</integer>
 		</dict>
 		<key>SAVE-NOTIFY-0001</key>
 		<dict>
 			<key>xpos</key>
-			<integer>730</integer>
+			<integer>490</integer>
 			<key>ypos</key>
-			<integer>130</integer>
+			<integer>190</integer>
 		</dict>
 	</dict>
 	<key>variables</key>

@@ -25,7 +25,7 @@ Type `ln <query>` to search your Linkwarden bookmarks by name or tag.
 
 ### Save a URL
 
-Type `ln <url>` (e.g. `ln https://example.com`) to check if a URL is already saved. If it isn't, you'll see an option to save it to Linkwarden. Press **Enter** to save.
+Type `lna <url>` (e.g. `lna https://example.com`) to save a URL to Linkwarden. Press **Enter** to confirm.
 
 ## Dependencies
 

@@ -29,10 +29,6 @@ interface AlfredItem {
   variables?: { [key: string]: string };
 }
 
-function isUrl(str: string): boolean {
-  return /^https?:\/\//i.test(str);
-}
-
 interface Tag {
   id: number;
   name: string;
@@ -133,7 +129,6 @@ function linkToItem(link: Link): AlfredItem {
     autocomplete: link.name,
     text: { copy: link.url, largetype: link.url },
     quicklookurl: link.url,
-    variables: { action: 'open' },
     mods: {
       ctrl: {
         arg: `${BASE_URL}/preserved/${link.id}?format=4`,
@@ -145,46 +140,27 @@ function linkToItem(link: Link): AlfredItem {
 
 try {
   const rawQuery = (process.argv[2] ?? '').trim();
-  const urlQuery = isUrl(rawQuery);
 
-  let links: Link[];
+  const [nameLinks, allTags] = await Promise.all([
+    apiFetch<Link[]>(`${BASE_URL}/api/v1/links?searchQueryString=${encodeURIComponent(query)}&searchByName=true`),
+    getTags(),
+  ]);
 
-  if (urlQuery) {
-    const urlLinks = await apiFetch<Link[]>(
-      `${BASE_URL}/api/v1/links?searchQueryString=${encodeURIComponent(rawQuery)}&searchByUrl=true`
-    );
-    links = urlLinks.filter(link => link.url === rawQuery);
-  } else {
-    const [nameLinks, allTags] = await Promise.all([
-      apiFetch<Link[]>(`${BASE_URL}/api/v1/links?searchQueryString=${encodeURIComponent(query)}&searchByName=true`),
-      getTags(),
-    ]);
+  const matchingTags = allTags.filter(t => t.name.toLowerCase().includes(query));
 
-    const matchingTags = allTags.filter(t => t.name.toLowerCase().includes(query));
+  const tagLinkResults = await Promise.all(
+    matchingTags.map(tag => apiFetch<Link[]>(`${BASE_URL}/api/v1/links?tagId=${tag.id}`))
+  );
 
-    const tagLinkResults = await Promise.all(
-      matchingTags.map(tag => apiFetch<Link[]>(`${BASE_URL}/api/v1/links?tagId=${tag.id}`))
-    );
+  const tagLinks = tagLinkResults.flat();
 
-    const tagLinks = tagLinkResults.flat();
-
-    const seen = new Map<number, Link>();
-    for (const link of [...nameLinks, ...tagLinks]) {
-      if (!seen.has(link.id)) seen.set(link.id, link);
-    }
-    links = [...seen.values()];
+  const seen = new Map<number, Link>();
+  for (const link of [...nameLinks, ...tagLinks]) {
+    if (!seen.has(link.id)) seen.set(link.id, link);
   }
+  const links = [...seen.values()];
 
-  const items: AlfredItem[] = links.map(linkToItem);
-
-  if (urlQuery && links.length === 0) {
-    items.push({
-      title: `Save "${rawQuery}" to Linkwarden`,
-      subtitle: 'Press Enter to save this URL',
-      arg: rawQuery,
-      variables: { action: 'save' },
-    });
-  } else if (links.length === 0) {
+  if (links.length === 0) {
     output([{
       title: `No results for "${rawQuery}"`,
       subtitle: 'Try a different search term or tag',
@@ -193,7 +169,7 @@ try {
     process.exit(0);
   }
 
-  output(items);
+  output(links.map(linkToItem));
 } catch (error) {
   output([{
     title: 'Error searching Linkwarden',
